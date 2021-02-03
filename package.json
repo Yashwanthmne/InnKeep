@@ -1,0 +1,19 @@
+{
+  "name": "innkeep",
+  "version": "1.0.0",
+  "description": "A comprehensive PMS solution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yashwanthmne/InnKeep.git"
+  },
+  "author": "Yash&Babu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yashwanthmne/InnKeep/issues"
+  },
+  "homepage": "https://github.com/Yashwanthmne/InnKeep#readme"
+}
