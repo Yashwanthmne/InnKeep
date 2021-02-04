@@ -4,6 +4,7 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 
+console.log('test')
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
