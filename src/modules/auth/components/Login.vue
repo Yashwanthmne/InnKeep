@@ -1,10 +1,13 @@
 <template>
-  <div
-    class="d-flex justify-content-center align-items-center min-vh-100 w-100"
-  >
-    <b-card class="p-4">
-      <h2><b-avatar icon="lock-fill"></b-avatar> Login</h2>
-      <b-form-group
+
+  <div class="d-flex justify-content-center align-items-center min-vh-100 w-100">
+    <b-card
+      class="p-4"
+    >
+      <h2>
+        <b-avatar icon="lock-fill"></b-avatar> Login
+      </h2>
+      <b-form-group 
         id="fieldset-username"
         label="Email"
         label-for="input-username"
