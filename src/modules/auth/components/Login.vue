@@ -6,7 +6,7 @@
       <h2>
         <b-avatar icon="lock-fill"></b-avatar> Login
       </h2>
-      <b-form-group
+      <b-form-group 
         id="fieldset-username"
         label="Email"
         label-for="input-username"
