@@ -6,9 +6,9 @@
       <h2>
         <b-avatar icon="lock-fill"></b-avatar> Login
       </h2>
-      <b-form-group
+      <b-form-group 
         id="fieldset-username"
-        label="Username"
+        label="Email"
         label-for="input-username"
         :state="!!username"
         class="mb-4"
