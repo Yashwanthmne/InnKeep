@@ -8,7 +8,7 @@
       </h2>
       <b-form-group
         id="fieldset-username"
-        label="Username"
+        label="Email"
         label-for="input-username"
         :state="!!username"
         class="mb-4"
