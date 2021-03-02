@@ -1,17 +1,17 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
 import { AuthRoutes } from "@/modules/auth/router";
+import { DashboardRoutes } from "@/modules/dashboard/router";
 
 Vue.use(VueRouter);
 
 const routes = [
   ...AuthRoutes,
+  ...DashboardRoutes,
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: "*",
+    component: () => import("../views/404.vue")
   }
 ];
 
