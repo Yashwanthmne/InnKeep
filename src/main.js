@@ -1,9 +1,9 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "./app.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import firebase from 'firebase/app';
+import firebase from "firebase/app";
 console.log("test");
 
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
@@ -11,6 +11,9 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import vuetify from "./plugins/vuetify";
+
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
@@ -32,8 +35,13 @@ const configOptions = {
 
 firebase.initializeApp(configOptions);
 
+// AUTH
+import auth from "@/modules/auth/auth";
+Vue.prototype.$auth = auth;
+
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount("#app");

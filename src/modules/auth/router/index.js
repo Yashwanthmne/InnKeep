@@ -1,11 +1,12 @@
 export const AuthRoutes = [
   {
-    name: "login",
+    name: "signin",
     path: "/login",
-    component: () =>
-      import(
-        /*webpackChunkName="auth-login"*/
-        "@/modules/auth/components/Login"
-      )
+    component: () => import("@/modules/auth/components/signin")
+  },
+  {
+    name: "signup",
+    path: "/register",
+    component: () => import("@/modules/auth/components/signup")
   }
 ];
