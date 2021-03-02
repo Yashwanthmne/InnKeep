@@ -1,20 +1,25 @@
-name: Deployed to Production Environment
-runs-on: ubuntu-latest
-on: 
-  push:
-    branches:
-      - master
-
-jobs:
-  firebase-deploy:
+--- 
+jobs: 
+  firebase-deploy: 
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
-      - run: npm install
-      - run: npm run build
-      - uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEPLOY }}
+    steps: 
+      - 
+        uses: actions/checkout@master
+      - 
+        uses: actions/setup-node@master
+      - 
+        run: "npm install"
+      - 
+        run: "npm run build"
+      - 
+        env: 
+          FIREBASE_TOKEN: "${{ secrets.FIREBASE_DEPLOY }}"
+        uses: w9jds/firebase-action@master
+        with: 
+          args: "deploy --only hosting"
+name: "Deployed to Production Environment"
+runs-on: ubuntu-latest
+true: 
+  push: 
+    branches: 
+      - master
