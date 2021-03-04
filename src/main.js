@@ -12,7 +12,8 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import vuetify from "./plugins/vuetify";
+import vuetify from "@/plugins/vuetify";
+import vueToast from "@/plugins/vue-toast";
 
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 
@@ -36,6 +37,7 @@ auth.onAuthStateChanged(user => {
       router,
       store,
       vuetify,
+      vueToast,
       render: h => h(App)
     }).$mount("#app");
   }

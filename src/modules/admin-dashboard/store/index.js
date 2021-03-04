@@ -31,14 +31,16 @@ const AdminDashboard = {
     }
   },
   actions: {
-    fetch_institutions({ commit }) {
+    fetch_institutions({ commit, rootState }) {
       commit("SET_FETCHING_INSTITUTIONS", true);
       institutionsCollection
         .get()
         .then(collection => {
           commit(
             "SET_INSTITUTIONS",
-            collection.docs.map(doc => doc.data())
+            collection.docs
+              .filter(doc => doc.data().user === rootState.user.email)
+              .map(doc => doc.data())
           );
         })
         .catch(() => {

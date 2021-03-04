@@ -74,10 +74,14 @@ export default {
         .set({
           name: this.form.name,
           type: this.form.type,
-          total_resources: this.form.total_resources
+          total_resources: this.form.total_resources,
+          user: this.$store.state["user"].email
         })
         .then(() => {
           console.log("Document successfully written!");
+          this.$toast.success(
+            `${this.form.name} created successfully, you can create rooms now.`
+          );
           this.$store.dispatch("AdminDashboard/fetch_institutions");
           this.$emit("close");
         })

@@ -12,6 +12,20 @@
               <v-flex xs8>
                 <v-form v-model="valid" lazy-validation>
                   <v-text-field
+                    v-model="name"
+                    prepend-icon="mdi-account"
+                    name="name"
+                    label="Name"
+                    type="text"
+                  />
+                  <v-text-field
+                    v-model="company"
+                    prepend-icon="mdi-home"
+                    name="company"
+                    label="Company Name"
+                    type="text"
+                  />
+                  <v-text-field
                     v-model="email"
                     :rules="emailRules"
                     prepend-icon="mdi-mail"
@@ -57,6 +71,8 @@ export default {
   data() {
     return {
       valid: false,
+      name: "",
+      company: "",
       email: "",
       password: "",
       emailRules: [
@@ -94,6 +110,8 @@ export default {
     ...mapActions("AuthStore", ["signUp"]),
     onSignUp() {
       this.signUp({
+        name: this.name,
+        company: this.company,
         email: this.email,
         password: this.password
       });

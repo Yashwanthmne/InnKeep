@@ -22,7 +22,7 @@ export default {
     });
   },
 
-  register({ email, password }) {
+  register({ name, company, email, password }) {
     return new Promise((resolve, reject) => {
       firebase
         .auth()
@@ -33,7 +33,8 @@ export default {
             .doc(user.uid)
             .set({
               email: email,
-              name: "DUMMY"
+              name: name,
+              company: company
             })
             .then(() => {
               resolve(user);

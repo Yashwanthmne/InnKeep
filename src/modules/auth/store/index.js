@@ -47,13 +47,16 @@ const AuthStore = {
           });
       });
     },
-    signUp({ commit, dispatch }, { email, password }) {
+    signUp({ commit, dispatch }, { name, company, email, password }) {
       return new Promise((resolve, reject) => {
         commit("SET_LOADING", true);
         auth
-          .register({ email, password })
+          .register({ name, company, email, password })
           .then(data => {
             commit("SET_USER", data);
+            Vue.$toast.success(
+              `Welcome ${name}, Start by creating an institution :)`
+            );
             dispatch("fetchUserInfo", data, { root: true });
             resolve();
           })

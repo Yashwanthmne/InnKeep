@@ -14,6 +14,7 @@
       :headers="$options.headers"
       :items="$store.getters['AdminDashboard/get_institutions']"
       class="elevation-1"
+      no-data-text=""
     ></v-data-table>
     <div v-else>
       {{ $store.getters["AdminDashboard/fetching_institutions_error"] }}
