@@ -1,6 +1,6 @@
 <template>
   <transition mode="out-in">
-    <Main />
+    <Main></Main>
   </transition>
 </template>
 
@@ -16,11 +16,14 @@ export default {
   computed: {
     ...mapGetters("AuthStore", ["is_authenticated"])
   },
+  created() {
+    this.$store.dispatch("fetch_institution_types");
+  },
   methods: {
     check_authenticated() {
       if (
         !(
-          this.$auth.is_authenticated ||
+          this.$auth.is_authenticated() ||
           this.$route.name == "signin" ||
           this.$route.name == "signup"
         )
@@ -30,9 +33,9 @@ export default {
     }
   },
   watch: {
-    "$auth.authenticated"() {
-      this.check_authenticated();
-    }
+    // "$auth.authenticated"() {
+    //   this.check_authenticated();
+    // }
   }
 };
 </script>

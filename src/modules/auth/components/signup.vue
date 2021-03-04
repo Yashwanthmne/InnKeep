@@ -28,9 +28,6 @@
                     type="password"
                   />
                 </v-form>
-                <v-alert :value="hasError" type="error">
-                  {{ error }}
-                </v-alert>
                 <v-spacer />
                 <v-layout column>
                   <v-btn
@@ -82,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    if (this.$auth.is_authenticated) {
+    if (this.$auth.is_authenticated()) {
       this.$router.push({ name: "home" });
     }
   },

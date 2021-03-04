@@ -83,7 +83,7 @@ export default {
     };
   },
   mounted() {
-    if (this.$auth.is_authenticated) {
+    if (this.$auth.is_authenticated()) {
       this.$router.push({ name: "home" });
     }
   },

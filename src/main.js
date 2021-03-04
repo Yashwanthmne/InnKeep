@@ -3,8 +3,9 @@ import App from "./app.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import firebase from "firebase/app";
-console.log("test");
+
+// firebase
+import "@/firebase";
 
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
@@ -22,26 +23,24 @@ Vue.use(IconsPlugin);
 
 Vue.config.productionTip = false;
 
-const configOptions = {
-  apiKey: "AIzaSyAzKwxsGXcfgPExNEOAUWWRhIWcCOOh7rk",
-  authDomain: "innkeep-13353.firebaseapp.com",
-  databaseURL: "https://innkeep-13353-default-rtdb.firebaseio.com",
-  projectId: "innkeep-13353",
-  storageBucket: "innkeep-13353.appspot.com",
-  messagingSenderId: "797260103533",
-  appId: "1:797260103533:web:6873599abe9c98d3a0a464",
-  measurementId: "G-QQLVYTKCED"
-};
-
-firebase.initializeApp(configOptions);
-
 // AUTH
-import auth from "@/modules/auth/auth";
-Vue.prototype.$auth = auth;
+import __auth__ from "@/modules/auth/auth";
+Vue.prototype.$auth = __auth__;
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
-}).$mount("#app");
+import { auth } from "@/firebase";
+
+let app;
+auth.onAuthStateChanged(user => {
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      vuetify,
+      render: h => h(App)
+    }).$mount("#app");
+  }
+
+  if (user) {
+    store.dispatch("fetchUserInfo", user);
+  }
+});
