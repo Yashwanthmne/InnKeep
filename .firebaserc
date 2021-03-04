@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "innkeep-13353"
+    "default": "innkeep-13353",
+    "production": "innkeep-13353"
   }
 }

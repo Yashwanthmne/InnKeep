@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a1468efac7f0929d050670917e2e250c.js"
+  "/precache-manifest.8e796dc96e4d824889589015d24df607.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "innkeep"});
