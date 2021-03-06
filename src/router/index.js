@@ -2,14 +2,18 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import { AuthRoutes } from "@/modules/auth/router";
+import { DashboardRoutes } from "@/modules/dashboard/router";
+import { UserRoutes } from "@/modules/user/router";
 import { AdminDashboardRoutes } from "@/modules/admin-dashboard/router";
+
 
 Vue.use(VueRouter);
 
 const routes = [
   ...AuthRoutes,
-  ...AdminDashboardRoutes,
-  {
+  ...DashboardRoutes,
+  ...UserRoutes,
+  ...AdminDashboardRoutes,  {
     path: "*",
     component: () => import("../views/404.vue")
   }
