@@ -1,5 +1,7 @@
 import firebase from "firebase";
 import router from "@/router";
+import { auth, usersCollection } from "@/firebase";
+import store from "@/store";
 
 export default {
   user: {
@@ -12,7 +14,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(({ user }) => {
-          localStorage.setItem("user", JSON.stringify(user));
           resolve(user);
         })
         .catch(err => {
@@ -21,15 +22,23 @@ export default {
     });
   },
 
-  register({ email, password }) {
+  register({ name, company, email, password }) {
     return new Promise((resolve, reject) => {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(({ user }) => {
-          console.log({ user })
-          localStorage.setItem("user", JSON.stringify(user));
-          resolve(user);
+          // create user profile object in userCollections
+          usersCollection
+            .doc(user.uid)
+            .set({
+              email: email,
+              name: name,
+              company: company
+            })
+            .then(() => {
+              resolve(user);
+            });
         })
         .catch(err => {
           reject(err);
@@ -37,12 +46,18 @@ export default {
     });
   },
 
-  logout() {
-    localStorage.removeItem("user");
-    router.push({ name: "sign-in" });
+  async logout() {
+    auth
+      .signOut()
+      .then(() => {
+        // clear userProfile and redirect to /login
+        store.commit("SET_USER", {});
+        router.push({ name: "signin" });
+      })
+      .catch(() => {});
   },
 
-  get is_authenticated() {
-    return !!localStorage.getItem("user");
+  is_authenticated() {
+    return auth.currentUser;
   }
 };

@@ -1,6 +1,7 @@
 import Vue from "vue";
-import router from "@/router";
 import auth from "../auth";
+import router from "@/router";
+import { auth as firebase_auth } from "@/firebase";
 
 const AuthStore = {
   namespaced: true,
@@ -28,14 +29,14 @@ const AuthStore = {
     }
   },
   actions: {
-    signUserIn({ commit }, { email, password }) {
+    signUserIn({ commit, dispatch }, { email, password }) {
       return new Promise((resolve, reject) => {
         commit("SET_LOADING", true);
         auth
           .login({ email, password })
           .then(data => {
             commit("SET_USER", data);
-            router.push({ name: "home" });
+            dispatch("fetchUserInfo", data, { root: true });
             resolve();
           })
           .catch(err => {
@@ -46,14 +47,17 @@ const AuthStore = {
           });
       });
     },
-    signUp({ commit }, { email, password }) {
+    signUp({ commit, dispatch }, { name, company, email, password }) {
       return new Promise((resolve, reject) => {
         commit("SET_LOADING", true);
         auth
-          .register({ email, password })
+          .register({ name, company, email, password })
           .then(data => {
             commit("SET_USER", data);
-            router.push({ name: "home" });
+            Vue.$toast.success(
+              `Welcome ${name}, Start by creating an institution :)`
+            );
+            dispatch("fetchUserInfo", data, { root: true });
             resolve();
           })
           .catch(err => {
@@ -63,6 +67,16 @@ const AuthStore = {
             commit("SET_LOADING", false);
           });
       });
+    },
+    logout({ commit }) {
+      firebase_auth
+        .signOut()
+        .then(() => {
+          // clear userProfile and redirect to /login
+          commit("SET_USER", {}, { root: true });
+          router.push({ name: "signin" });
+        })
+        .catch(() => {});
     }
   }
 };

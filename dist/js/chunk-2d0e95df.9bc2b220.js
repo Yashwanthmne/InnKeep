@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e95df"],{"8cdb":function(n,e,a){"use strict";a.r(e);var t=function(){var n=this,e=n.$createElement,a=n._self._c||e;return a("v-card",[n._v(" Oops! page not found. ")])},c=[],u=a("2877"),o=a("6544"),r=a.n(o),d=a("b0af"),l={},s=Object(u["a"])(l,t,c,!1,null,null,null);e["default"]=s.exports;r()(s,{VCard:d["a"]})}}]);
-//# sourceMappingURL=chunk-2d0e95df.9bc2b220.js.map
