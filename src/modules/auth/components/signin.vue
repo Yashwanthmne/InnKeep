@@ -1,10 +1,10 @@
-<template>
-  <v-main>
-    <v-container fill-height fluid>
-      <v-layout align-center justify-center>
-        <v-flex xs12 sm8 md4>
+<template >
+  <v-main >
+    <v-container style="margin-top:12%" md3 fluid>
+      <v-layout justify-end align-content-center>
+        <v-flex xs12 sm8 md3 >
           <v-card class="elevation-12">
-            <v-toolbar dark color="primary">
+            <v-toolbar dark color="secondary">
               <v-toolbar-title>Signin</v-toolbar-title>
               <v-spacer />
             </v-toolbar>
@@ -16,7 +16,7 @@
                   :rules="[() => !!email || 'This field is required']"
                   prepend-icon="mdi-account"
                   label="Login"
-                  placeholder="TotallyNotThanos"
+                  placeholder="Email"
                   required
                 />
                 <v-text-field
@@ -37,28 +37,32 @@
             </v-card-text>
             <v-snackbar v-model="snackbar" :color="color" :top="true">
               {{ errorMessages }}
-              <v-btn dark text @click="snackbar = false">
+              <v-btn text @click="snackbar = false">
                 Close
               </v-btn>
             </v-snackbar>
-            <v-layout column>
+            <v-layout column align-center>
+              <div class="text-xs-center">
               <v-btn
                 :disabled="!email || !password"
                 :loading="loading"
-                color="primary"
+                color="success"
+                width="40px"
+                
                 @click="login"
                 data-testid="button-login"
                 >Login</v-btn
               >
+              </div>
               <v-spacer />
               <v-divider class="mt-5" />
               <p>
-                Don't got an account? Signup here
-                <router-link
+                Don't have an account? 
+                <router-link class="active"
                   :to="{
                     name: 'signup'
                   }"
-                  >Signup</router-link
+                  >Signup here</router-link
                 >
               </p>
             </v-layout>
@@ -68,6 +72,21 @@
     </v-container>
   </v-main>
 </template>
+
+
+<style scoped>
+.active{
+   color: blue;;
+   cursor: pointer;
+ }
+v-btn{
+  color: red;
+}
+p{
+
+font-size: 12px;
+}
+</style>
 
 <script>
 import { mapActions, mapGetters } from "vuex";

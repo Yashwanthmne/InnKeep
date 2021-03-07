@@ -1,7 +1,8 @@
 <template>
-  <v-app>
+  <v-app
+  :style="{'background-image': 'url(' + require('@/assets/images/bg.png') + ')'}">
     <div>
-      <v-app-bar color="deep-purple accent-4" dark>
+      <v-app-bar color="secondary" dark>
         <div
           style="width:100%;display:flex;justify-content:space-between;align-items:center;"
         >
@@ -29,6 +30,12 @@
     </div>
   </v-app>
 </template>
+
+<style scoped>
+v-app{
+  
+}
+</style>
 
 <script>
 import CreateInstitution from "@/modules/institutions/create/components/create_institution.vue";
