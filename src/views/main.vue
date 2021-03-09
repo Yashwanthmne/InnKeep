@@ -1,50 +1,66 @@
 <template>
-  <v-app
-  :style="{'background-image': 'url(' + require('@/assets/images/bg.png') + ')'}">
-    <div>
-      <v-app-bar color="secondary" dark>
-        <div
-          style="width:100%;display:flex;justify-content:space-between;align-items:center;"
-        >
-          <v-toolbar-title>InnKeep</v-toolbar-title>
-          <div
-            style="display:flex;justify-content:space-between;align-items:center;"
-          >
-            <v-btn
-              style="margin-right:16px;"
-              @click="$store.dispatch('open_create_institution_form')"
-              v-if="is_authenticated"
-              >Create Institution</v-btn
-            >
-            <v-btn @click="logout" v-if="is_authenticated">Logout</v-btn>
-          </div>
-        </div>
-      </v-app-bar>
-      <v-main>
-        <router-view></router-view>
-        <create-institution
-          v-if="$store.state.show_create_institution_form"
-          @close="$store.dispatch('close_create_institution_form')"
-        ></create-institution>
-      </v-main>
-    </div>
+  <v-app>
+    <v-app-bar color="secondary" height="64px" absolute elevate-on-scroll>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-toolbar-title>InnKeep</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+      <v-switch
+        style="margin-top:auto;margin-bottom:auto;"
+        v-model="darkTheme"
+        :label="`Dark mode`"
+        color="accent"
+        inset
+      ></v-switch>
+      <v-btn
+        style="margin-right:16px;"
+        @click="$store.dispatch('open_create_institution_form')"
+        v-if="is_authenticated"
+        >Create Institution</v-btn
+      >
+      <v-btn @click="logout" v-if="is_authenticated">Logout</v-btn>
+    </v-app-bar>
+    <v-navigation-drawer app floating v-if="is_authenticated" color="secondary">
+      <v-card-title>
+        InnKeep
+      </v-card-title>
+      <sidebar></sidebar>
+    </v-navigation-drawer>
+    <v-content>
+      <v-container fluid>
+        <v-row class="fill-height">
+          <v-col>
+            <transition name="fade">
+              <router-view></router-view>
+            </transition>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+    <create-institution
+      v-if="$store.state.show_create_institution_form"
+      @close="$store.dispatch('close_create_institution_form')"
+    ></create-institution>
   </v-app>
 </template>
 
-<style scoped>
-v-app{
-  
-}
-</style>
-
 <script>
 import CreateInstitution from "@/modules/institutions/create/components/create_institution.vue";
-
+import sidebar from "@/modules/admin-dashboard/components/sidebar.vue";
 export default {
-  components: { CreateInstitution },
+  components: { CreateInstitution, sidebar },
   computed: {
     is_authenticated() {
       return this.$store.getters["is_authenticated"];
+    },
+    darkTheme: {
+      get() {
+        return this.$store.state.theme.dark;
+      },
+      set(value) {
+        return this.$store.commit("SET_DARK_THEME", value);
+      }
     }
   },
   methods: {

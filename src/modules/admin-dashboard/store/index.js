@@ -6,7 +6,8 @@ const AdminDashboard = {
   state: {
     institutions: [],
     fetching_institutions: false,
-    fetching_institutions_error: ""
+    fetching_institutions_error: "",
+    active_institution_dashboard: null
   },
   getters: {
     get_institutions(state) {
@@ -17,6 +18,9 @@ const AdminDashboard = {
     },
     fetching_institutions_error(state) {
       return state.fetching_institutions_error;
+    },
+    active_institution_dashboard(state) {
+      return state.active_institution_dashboard;
     }
   },
   mutations: {
@@ -28,6 +32,13 @@ const AdminDashboard = {
     },
     SET_FETCHING_INSTITUTIONS_ERROR(state, payload) {
       Vue.set(state, "fetching_institutions_error", payload);
+    },
+    SET_ACTIVE_INSTITUTION_DASHBOARD(state, payload) {
+      console.log({ payload })
+      Vue.set(state, "active_institution_dashboard", payload);
+    },
+    RESET_ACTIVE_INSTITUTION_DASHBOARD(state) {
+      Vue.set(state, "active_institution_dashboard", null);
     }
   },
   actions: {

@@ -4,7 +4,7 @@
       <v-layout justify-end align-content-center>
         <v-flex xs12 sm8 md3 >
           <v-card class="elevation-12">
-            <v-toolbar dark color="secondary">
+            <v-toolbar color="secondary">
               <v-toolbar-title>Signin</v-toolbar-title>
               <v-spacer />
             </v-toolbar>

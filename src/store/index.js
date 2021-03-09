@@ -13,7 +13,10 @@ const store = new Vuex.Store({
   state: {
     user: {},
     show_create_institution_form: false,
-    institution_types: []
+    institution_types: [],
+    theme: {
+      dark: true
+    }
   },
   getters: {
     is_authenticated(state) {
@@ -38,6 +41,9 @@ const store = new Vuex.Store({
     },
     SET_INSTITUTION_TYPES(state, payload) {
       Vue.set(state, "institution_types", payload);
+    },
+    SET_DARK_THEME(state, payload = true) {
+      Vue.set(state.theme, "dark", payload);
     }
   },
   actions: {

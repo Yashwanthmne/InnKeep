@@ -50,6 +50,7 @@
 
 <script>
 import { institutionsCollection } from "@/firebase";
+import { GET_RANDOM_ID } from "@/resources/getRandomId";
 export default {
   data() {
     return {
@@ -75,7 +76,8 @@ export default {
           name: this.form.name,
           type: this.form.type,
           total_resources: this.form.total_resources,
-          user: this.$store.state["user"].email
+          user: this.$store.state["user"].email,
+          institution_id: GET_RANDOM_ID()
         })
         .then(() => {
           console.log("Document successfully written!");
