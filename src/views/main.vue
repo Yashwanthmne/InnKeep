@@ -1,5 +1,10 @@
 <template>
-  <v-app>
+  <v-app
+    :style="{
+      'background-image': 'url(' + require('@/assets/images/bg.png') + ')'
+    }"
+  >
+    >
     <v-app-bar color="secondary" height="64px" absolute elevate-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
