@@ -2,7 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import AuthStore from "../modules/auth/store";
-import AdminDashboard from "../modules/admin-dashboard/store"
+import AdminDashboard from "../modules/admin-dashboard/store";
+import Institutions from "../modules/institutions/store";
 import { usersCollection, institutionTypesCollection } from "@/firebase";
 
 import router from "@/router";
@@ -75,6 +76,7 @@ const store = new Vuex.Store({
   modules: {
     AuthStore,
     AdminDashboard,
+    Institutions
   }
 });
 export default store;
