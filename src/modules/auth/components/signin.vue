@@ -100,11 +100,11 @@ export default {
       color: "general",
       showPassword: false
     };
-  },
+  }, 
   mounted() {
     if (this.$auth.is_authenticated()) {
       this.$router.push({ name: "home" });
-    }
+    } 
   },
   computed: {
     ...mapGetters("AuthStore", ["is_authenticated", "loading"])

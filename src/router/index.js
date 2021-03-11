@@ -9,9 +9,14 @@ import { AdminDashboardRoutes } from "@/modules/admin-dashboard/router";
 Vue.use(VueRouter);
 
 const routes = [
-  ...AuthRoutes,
   ...UserRoutes,
-  ...AdminDashboardRoutes,  {
+  {
+    path: "/",
+    component: () => import("../views/main.vue"),
+    children: [...AuthRoutes,
+               ...AdminDashboardRoutes,]
+  },
+  {
     path: "*",
     component: () => import("../views/404.vue")
   }

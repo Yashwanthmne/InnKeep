@@ -1,15 +1,24 @@
 <template>
+<v-app
+    :style="{
+      'background-image': 'url(' + require('@/assets/images/bg.png') + ')'
+    }"
+  >
   <transition mode="out-in">
-    <Main></Main>
+    <!-- <Main></Main> -->
+    <router-view></router-view>
   </transition>
+  </v-app>
+
+  
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import Main from "./views/main";
+// import Main from "./views/main";
 export default {
   name: "App",
-  components: { Main },
+  // components: { Main },
   mounted() {
     this.check_authenticated();
   },
@@ -33,9 +42,9 @@ export default {
     }
   },
   watch: {
-    // "$auth.authenticated"() {
-    //   this.check_authenticated();
-    // }
+    "$auth.authenticated"() {
+      this.check_authenticated();
+    }
   }
 };
 </script>
