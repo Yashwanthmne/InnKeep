@@ -56,7 +56,13 @@ const store = new Vuex.Store({
       commit("SET_USER", userProfile.data());
 
       // change route to dashboard
+      // console.log(router)
+      if(
+        router.currentRoute.name == "signin" ||
+        router.currentRoute.name == "signup"
+      ){
       router.push({ name: "home" }).catch(() => {});
+      }
     },
     open_create_institution_form({ commit }) {
       commit("SET_SHOW_CREATE_INSTITUTION_FORM", true);

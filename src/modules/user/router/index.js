@@ -1,7 +1,7 @@
 export const UserRoutes = [
     {
-      name: "user",
-      path: "/userhome",
+      name: "raise-issue",
+      path: "/raise-issue/:id",
       component: () => import("@/modules/user/components/home")
     }
   ];

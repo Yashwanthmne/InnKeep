@@ -14,7 +14,7 @@
 
           <v-card outlined tile>
             <v-card-subtitle>
-              Share/Open this link to raise an issue: {{ url }}/raise-issue/{{ $store.getters["Institutions/get_institute"].institution_id }}
+              Share/Open this link to raise an issue: <a target="_blank" :href="`${ url }/raise-issue/${ $store.getters['Institutions/get_institute'].institution_id }`" >{{ url }}/raise-issue/{{ $store.getters["Institutions/get_institute"].institution_id }} </a>
             </v-card-subtitle>
           </v-card>
 
@@ -44,7 +44,12 @@
     </v-container>
   </v-card>
 </template>
+<style scoped>
+a{
+  color: white;
+}
 
+</style>
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
