@@ -14,28 +14,54 @@
       <v-col>
         <v-card
           outlined
+          elevation="4"
           tile
           v-for="(request, index) in $store.getters[
             'Institutions/get_requests'
           ]"
           :key="index"
+          style="margin-bottom: 26px;"
         >
-          <v-card-title>
-            {{ request.type }}
+          <v-container>
+            <v-row>
+              <v-col>
+                <v-card-title>
+                  {{ request.type }}
 
-            <v-chip
-              class="ma-2"
-              :color="request.isOpen ? 'orange' : 'green'"
-              small
-            >
-              {{ request.isOpen ? "Open" : "Closed" }}
-            </v-chip>
-          </v-card-title>
-          <v-card-subtitle>
-            {{ request.desc }}
-          </v-card-subtitle>
+                  <v-chip
+                    class="ma-2"
+                    :color="request.isOpen ? 'orange' : 'green'"
+                    small
+                  >
+                    {{ request.isOpen ? "Open" : "Closed" }}
+                  </v-chip>
+                </v-card-title>
+                <v-card-subtitle>
+                  {{ request.desc }}
+                </v-card-subtitle>
+              </v-col>
+              <v-col>
+                <v-divider vertical></v-divider>
+              </v-col>
+              <v-col>
+                <v-chip class="ma-2" color="primary" label>
+                  <v-icon left>
+                    mdi-account-circle-outline
+                  </v-icon>
+                  Requester Information
+                </v-chip>
+                <v-card-title> Name: {{ request.name || "NA" }} </v-card-title>
+                <v-card-subtitle>
+                  Email: {{ request.email || "NA" }}
+                </v-card-subtitle>
+              </v-col>
+            </v-row>
+          </v-container>
+
           <v-card-actions>
-            <v-btn @click="openEditRequest({ request: request })">Edit</v-btn>
+            <v-btn @click="openEditRequest({ request: request })" block
+              >Edit</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>

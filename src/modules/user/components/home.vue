@@ -10,10 +10,9 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
-
                 <v-text-field
                   ref="name"
-                  v-model="type"
+                  v-model="name"
                   label="name"
                   placeholder="Please enter your name"
                   required
@@ -21,7 +20,7 @@
 
                 <v-text-field
                   ref="email"
-                  v-model="type"
+                  v-model="email"
                   label="email"
                   placeholder="Please enter email"
                   required
@@ -42,15 +41,14 @@
                   counter
                   required
                   @keydown.enter="login"
-                  
                 />
               </v-form>
             </v-card-text>
-        
+
             <v-layout column>
               <v-btn
-              :disabled="!type || !desc || loading"
-              :loading="loading"
+                :disabled="!type || !desc || loading"
+                :loading="loading"
                 color="primary"
                 @click="submit"
                 data-testid="button-login"
@@ -58,12 +56,9 @@
               >
               <v-spacer />
               <v-divider class="mt-5" />
-              
             </v-layout>
           </v-card>
-          <v-alert v-else
-            type="success"
-            >{{successMsg}}</v-alert>
+          <v-alert v-else type="success">{{ successMsg }}</v-alert>
         </v-flex>
       </v-layout>
     </v-container>
@@ -72,42 +67,47 @@
 
 <script>
 import firebase from "firebase";
-import {GET_RANDOM_ID} from "@/resources/getRandomId.js"
+import { GET_RANDOM_ID } from "@/resources/getRandomId.js";
 const db = firebase.firestore();
 
 export default {
   name: "add-request",
   data() {
     return {
-      name:"",
-      email:"",
-      type:"",
-      desc:"",
-      institution_id:"",
-      request_id:"",
-      isOpen:"",
+      name: "",
+      email: "",
+      type: "",
+      desc: "",
+      institution_id: "",
+      request_id: "",
+      isOpen: "",
       loading: false,
-      successMsg:"",
-
+      successMsg: ""
     };
   },
   methods: {
     submit() {
-        console.log(this.type);
-        this.loading = true;
-        db.collection("requests")
-        .add({name:this.name, email:this.email,type: this.type, desc: this.desc, isOpen: true, institution_id: this.$route.params.id, request_id: GET_RANDOM_ID()})
+      console.log(this.type);
+      this.loading = true;
+      db.collection("requests")
+        .add({
+          name: this.name,
+          email: this.email,
+          type: this.type,
+          desc: this.desc,
+          isOpen: true,
+          institution_id: this.$route.params.id,
+          request_id: GET_RANDOM_ID()
+        })
         .then(() => {
-            this.successMsg = "Request has been registered successfully!"
-            console.log("Sucess!");
-            this.loading = false;
+          this.successMsg = "Request has been registered successfully!";
+          console.log("Sucess!");
+          this.loading = false;
         })
-        .catch((error) => {
-            console.error("Error: ", error)
-        })
-     
-    },
-
+        .catch(error => {
+          console.error("Error: ", error);
+        });
+    }
   }
 };
 </script>
