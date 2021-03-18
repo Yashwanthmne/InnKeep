@@ -1,6 +1,5 @@
 <template>
   <v-container fluid v-if="$store.getters['user']">
-    
     <v-row class="fill-height">
       <v-col>
         <v-toolbar-title style="padding:16px;">
