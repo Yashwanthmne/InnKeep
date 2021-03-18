@@ -14,13 +14,22 @@
 
           <v-card outlined tile>
             <v-card-subtitle>
-              Share/Open this link to raise an issue: <a target="_blank" :href="`${ url }/raise-issue/${ $store.getters['Institutions/get_institute'].institution_id }`" >{{ url }}/raise-issue/{{ $store.getters["Institutions/get_institute"].institution_id }} </a>
+              Share/Open this link to raise an issue:
+              <a
+                target="_blank"
+                :href="
+                  `${url}/raise-issue/${$store.getters['Institutions/get_institute'].institution_id}`
+                "
+                >{{ url }}/raise-issue/{{
+                  $store.getters["Institutions/get_institute"].institution_id
+                }}
+              </a>
             </v-card-subtitle>
           </v-card>
 
           <v-tabs v-model="tab" grow color="accent">
             <v-tab>
-              Issues
+              Requests
             </v-tab>
             <v-tab>
               Resources
@@ -30,7 +39,9 @@
           <v-tabs-items v-model="tab">
             <v-tab-item>
               <v-card color="basil" flat>
-                <v-card-text>{{ text }}</v-card-text>
+                <v-card-text>
+                  <requests></requests>
+                </v-card-text>
               </v-card>
             </v-tab-item>
             <v-tab-item>
@@ -45,19 +56,23 @@
   </v-card>
 </template>
 <style scoped>
-a{
+a {
   color: white;
 }
-
 </style>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import requests from "@/modules/institutions/details/requests";
 export default {
+  components: {
+    requests
+  },
   data() {
     return {
       tab: null,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      url: window.location.origin,
+      text:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      url: window.location.origin
     };
   },
   computed: {
