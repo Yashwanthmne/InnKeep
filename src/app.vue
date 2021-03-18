@@ -1,16 +1,10 @@
 <template>
-<v-app
-    :style="{
-      'background-image': 'url(' + require('@/assets/images/bg.png') + ')'
-    }"
-  >
-  <transition mode="out-in">
-    <!-- <Main></Main> -->
-    <router-view></router-view>
-  </transition>
+  <v-app :style="style">
+    <transition mode="out-in">
+      <!-- <Main></Main> -->
+      <router-view></router-view>
+    </transition>
   </v-app>
-
-  
 </template>
 
 <script>
@@ -23,7 +17,14 @@ export default {
     this.check_authenticated();
   },
   computed: {
-    ...mapGetters("AuthStore", ["is_authenticated"])
+    ...mapGetters("AuthStore", ["is_authenticated"]),
+    style() {
+      return {
+        "background-image": this.$vuetify.theme.dark
+          ? "url(" + require("@/assets/images/bg.png") + ")"
+          : "unset"
+      };
+    }
   },
   created() {
     this.$store.dispatch("fetch_institution_types");

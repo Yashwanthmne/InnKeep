@@ -1,10 +1,5 @@
 <template>
-  <v-app
-    :style="{
-      'background-image': 'url(' + require('@/assets/images/bg.png') + ')'
-    }"
-  >
-    >
+  <div>
     <v-app-bar color="secondary" height="64px" absolute elevate-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -47,7 +42,7 @@
       v-if="$store.state.show_create_institution_form"
       @close="$store.dispatch('close_create_institution_form')"
     ></create-institution>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -64,6 +59,8 @@ export default {
         return this.$store.state.theme.dark;
       },
       set(value) {
+        console.log({ value })
+        this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
         return this.$store.commit("SET_DARK_THEME", value);
       }
     }

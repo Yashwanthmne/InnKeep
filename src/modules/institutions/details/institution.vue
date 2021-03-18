@@ -16,6 +16,7 @@
             <v-card-subtitle>
               Share/Open this link to raise an issue:
               <a
+                style="color:blue;"
                 target="_blank"
                 :href="
                   `${url}/raise-issue/${$store.getters['Institutions/get_institute'].institution_id}`
