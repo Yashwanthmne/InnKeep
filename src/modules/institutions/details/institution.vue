@@ -46,7 +46,7 @@
             </v-tab-item>
             <v-tab-item>
               <v-card color="basil" flat>
-                <v-card-text>{{ text }}</v-card-text>
+                <resources></resources>
               </v-card>
             </v-tab-item>
           </v-tabs-items>
@@ -63,9 +63,11 @@ a {
 <script>
 import { mapActions, mapGetters } from "vuex";
 import requests from "@/modules/institutions/details/requests";
+import resources from '@/modules/institutions/details/resources'
 export default {
   components: {
-    requests
+    requests,
+    resources,
   },
   data() {
     return {

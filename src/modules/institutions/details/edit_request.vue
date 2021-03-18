@@ -9,6 +9,18 @@
             </v-toolbar>
             <v-card-title>
               {{ request.type }}
+              <v-chip
+                class="ma-2"
+                :color="request.isOpen ? 'orange' : 'green'"
+                small
+              >
+                {{ request.isOpen ? "Open" : "Closed" }}
+              </v-chip>
+            </v-card-title>
+            <v-card-subtitle>
+              {{ request.desc }}
+            </v-card-subtitle>
+            <v-card-text>
               <v-switch
                 style="margin-left:24px;"
                 v-model="local_request.isOpen"
@@ -16,10 +28,7 @@
                 :label="local_request.isOpen ? 'Open' : 'Closed'"
                 color="orange"
               ></v-switch>
-            </v-card-title>
-            <v-card-subtitle>
-              {{ request.desc }}
-            </v-card-subtitle>
+            </v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
                 text
@@ -76,8 +85,7 @@ export default {
       if (docs && docs.length) {
         console.log({ docs });
         await docs[0].ref.update({
-          isOpen: false
-          // this.local_request.isOpen
+          isOpen: this.local_request.isOpen
         });
       }
       this.saving = false;

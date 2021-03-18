@@ -10,10 +10,16 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
+                <v-select
+                  :items="resources"
+                  label="Resource*"
+                  v-model="resource"
+                />
+
                 <v-text-field
                   ref="name"
                   v-model="name"
-                  label="name"
+                  label="Name"
                   placeholder="Please enter your name"
                   required
                 />
@@ -21,7 +27,7 @@
                 <v-text-field
                   ref="email"
                   v-model="email"
-                  label="email"
+                  label="Email"
                   placeholder="Please enter email"
                   required
                 />
@@ -29,14 +35,14 @@
                 <v-text-field
                   ref="type"
                   v-model="type"
-                  label="request"
+                  label="Request"
                   placeholder="Please enter type of request"
                   required
                 />
                 <v-text-field
                   ref="desc"
                   v-model="desc"
-                  label="desc"
+                  label="Request Description"
                   placeholder="Enter descripton of request"
                   counter
                   required
@@ -47,7 +53,7 @@
 
             <v-layout column>
               <v-btn
-                :disabled="!type || !desc || loading"
+                :disabled="!type || !desc || loading || !resource"
                 :loading="loading"
                 color="primary"
                 @click="submit"
@@ -68,6 +74,7 @@
 <script>
 import firebase from "firebase";
 import { GET_RANDOM_ID } from "@/resources/getRandomId.js";
+import { mapGetters } from "vuex";
 const db = firebase.firestore();
 
 export default {
@@ -82,8 +89,14 @@ export default {
       request_id: "",
       isOpen: "",
       loading: false,
-      successMsg: ""
+      successMsg: "",
+      resource: null
     };
+  },
+  mounted() {
+    this.$store.dispatch("Institutions/fetch_resources_of_institute", {
+      institution_id: this.$route.params.id
+    });
   },
   methods: {
     submit() {
@@ -97,7 +110,8 @@ export default {
           desc: this.desc,
           isOpen: true,
           institution_id: this.$route.params.id,
-          request_id: GET_RANDOM_ID()
+          request_id: GET_RANDOM_ID(),
+          resource: this.resource,
         })
         .then(() => {
           this.successMsg = "Request has been registered successfully!";
@@ -107,6 +121,12 @@ export default {
         .catch(error => {
           console.error("Error: ", error);
         });
+    }
+  },
+  computed: {
+    ...mapGetters("Institutions", ["get_resources"]),
+    resources() {
+      return this.get_resources.map(resource => resource.title);
     }
   }
 };

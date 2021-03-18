@@ -12,7 +12,7 @@
 
       <v-spacer></v-spacer>
       <v-switch
-        style="margin-top:auto;margin-bottom:auto;"
+        style="margin-top:16px;margin-right:24px;margin-bottom:auto;"
         v-model="darkTheme"
         :label="`Dark mode`"
         color="accent"

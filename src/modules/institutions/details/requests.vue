@@ -4,21 +4,26 @@
     indeterminate
     color="green"
   ></v-progress-linear>
-  <v-container
-    v-else-if="
-      $store.getters['Institutions/get_requests'] &&
-        $store.getters['Institutions/get_requests'].length
-    "
-  >
+  <v-container v-else-if="get_requests && get_requests.length">
+    <v-row>
+      <v-radio-group v-model="requests_filter" row>
+        <v-radio
+          v-for="filter in Object.values(requests_filters_list)"
+          :key="filter"
+          color="accent"
+          :label="`${filter}`"
+          :value="filter"
+          style="width:30%;"
+        ></v-radio>
+      </v-radio-group>
+    </v-row>
     <v-row>
       <v-col>
         <v-card
           outlined
           elevation="4"
           tile
-          v-for="(request, index) in $store.getters[
-            'Institutions/get_requests'
-          ]"
+          v-for="(request, index) in get_requests_to_show"
           :key="index"
           style="margin-bottom: 26px;"
         >
@@ -39,6 +44,16 @@
                 <v-card-subtitle>
                   {{ request.desc }}
                 </v-card-subtitle>
+                <v-card-text>
+                  <v-chip
+                    class="my-2 mr-2"
+                    color="blue"
+                    small
+                    v-if="request.resource"
+                  >
+                    {{ request.resource }}
+                  </v-chip>
+                </v-card-text>
               </v-col>
               <v-col>
                 <v-divider vertical></v-divider>
@@ -64,6 +79,11 @@
             >
           </v-card-actions>
         </v-card>
+        <v-card v-if="!get_requests_to_show.length" outlined elevation="4" tile>
+          <v-card-title>
+            No {{ requests_filter }} requests found.
+          </v-card-title>
+        </v-card>
       </v-col>
       <edit-request
         v-if="edit_request.open"
@@ -75,7 +95,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import EditRequest from "@/modules/institutions/details/edit_request";
 export default {
   components: {
@@ -87,15 +107,21 @@ export default {
         open: false,
         request: null
       },
-      timestamp: null
+      timestamp: null,
+      requests_filters_list: {
+        open: "Open",
+        closed: "Closed",
+        all: "All"
+      },
+      requests_filter: "Open"
     };
   },
   mounted() {
     this.fetch_requests_of_institute();
-    setInterval(() => {
-      console.log("helmo");
-      this.fetch_requests_of_institute({ loading: false });
-    }, 7000);
+    // setInterval(() => {
+    //   console.log("helmo");
+    //   this.fetch_requests_of_institute({ loading: false });
+    // }, 7000);
   },
   methods: {
     ...mapActions("Institutions", ["fetch_requests_of_institute"]),
@@ -117,6 +143,21 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timestamp);
+  },
+  computed: {
+    ...mapGetters("Institutions", ["get_requests"]),
+    get_requests_to_show() {
+      switch (this.requests_filter) {
+        case this.requests_filters_list.open:
+          return this.get_requests.filter(request => !!request.isOpen);
+
+        case this.requests_filters_list.closed:
+          return this.get_requests.filter(request => !request.isOpen);
+
+        default:
+          return this.get_requests;
+      }
+    }
   }
 };
 </script>

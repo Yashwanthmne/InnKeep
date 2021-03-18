@@ -27,6 +27,7 @@ const usersCollection = db.collection("users");
 const institutionTypesCollection = db.collection("institution_types");
 const institutionsCollection = db.collection("institutions");
 const requestsCollection = db.collection("requests");
+const resourcesCollection = db.collection("resources");
 
 // export utils/refs
 export {
@@ -36,5 +37,6 @@ export {
   usersCollection,
   institutionsCollection,
   institutionTypesCollection,
-  requestsCollection
+  requestsCollection,
+  resourcesCollection
 };
