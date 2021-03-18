@@ -10,6 +10,23 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
+
+                <v-text-field
+                  ref="name"
+                  v-model="type"
+                  label="name"
+                  placeholder="Please enter your name"
+                  required
+                />
+
+                <v-text-field
+                  ref="email"
+                  v-model="type"
+                  label="email"
+                  placeholder="Please enter email"
+                  required
+                />
+
                 <v-text-field
                   ref="type"
                   v-model="type"
@@ -62,6 +79,8 @@ export default {
   name: "add-request",
   data() {
     return {
+      name:"",
+      email:"",
       type:"",
       desc:"",
       institution_id:"",
@@ -77,7 +96,7 @@ export default {
         console.log(this.type);
         this.loading = true;
         db.collection("requests")
-        .add({type: this.type, desc: this.desc, isOpen: true, institution_id: this.$route.params.id, request_id: GET_RANDOM_ID()})
+        .add({name:this.name, email:this.email,type: this.type, desc: this.desc, isOpen: true, institution_id: this.$route.params.id, request_id: GET_RANDOM_ID()})
         .then(() => {
             this.successMsg = "Request has been registered successfully!"
             console.log("Sucess!");
