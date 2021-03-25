@@ -3,8 +3,15 @@
     <v-row class="fill-height">
       <v-col>
         <v-list shaped>
-          <v-subheader>INSTITUTIONS</v-subheader>
+          <v-subheader>INSTIT UTIONS</v-subheader>
+          <v-progress-linear
+            v-if="fetching_institutions"
+            indeterminate
+            color="green"
+            
+          ></v-progress-linear>
           <v-list-item-group
+            v-else
             color="accent"
             v-model="activeInstitutionDashboard"
           >
@@ -28,11 +35,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   mounted() {
     this.$store.dispatch("AdminDashboard/fetch_institutions");
   },
   computed: {
+    ...mapGetters("AdminDashboard", ["fetching_institutions"]),
     activeInstitutionDashboard: {
       get() {
         return this.$store.getters["AdminDashboard/get_institutions"].findIndex(

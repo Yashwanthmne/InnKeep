@@ -14,7 +14,7 @@ const AdminDashboard = {
       return state.institutions;
     },
     fetching_institutions(state) {
-      return state.fetch_institutions;
+      return state.fetching_institutions;
     },
     fetching_institutions_error(state) {
       return state.fetching_institutions_error;
@@ -61,7 +61,9 @@ const AdminDashboard = {
           );
         })
         .then(() => {
-          commit("SET_FETCHING_INSTITUTIONS", false);
+          setTimeout(() => {
+            commit("SET_FETCHING_INSTITUTIONS", false);
+          }, 400);
         });
     }
   }
