@@ -16,6 +16,12 @@
                   v-model="resource"
                 />
 
+                <v-select
+                  :items="services"
+                  label="Service*"
+                  v-model="service"
+                />
+
                 <v-text-field
                   ref="name"
                   v-model="name"
@@ -33,13 +39,6 @@
                 />
 
                 <v-text-field
-                  ref="type"
-                  v-model="type"
-                  label="Request"
-                  placeholder="Please enter type of request"
-                  required
-                />
-                <v-text-field
                   ref="desc"
                   v-model="desc"
                   label="Request Description"
@@ -53,7 +52,7 @@
 
             <v-layout column>
               <v-btn
-                :disabled="!type || !desc || loading || !resource"
+                :disabled="!desc || loading || !resource || !service"
                 :loading="loading"
                 color="primary"
                 @click="submit"
@@ -64,7 +63,23 @@
               <v-divider class="mt-5" />
             </v-layout>
           </v-card>
-          <v-alert v-else type="success">{{ successMsg }}</v-alert>
+          <v-card v-else>
+            <v-alert type="success" text>{{ successMsg }}</v-alert>
+            <v-card-text>
+              You can track you service request here 👉
+              <router-link
+                :to="{
+                  name: 'request-status',
+                  params: {
+                    id: request_id
+                  }
+                }"
+                style="color:yellow;"
+              >
+                {{ "Request status #" + request_id }}
+              </router-link>
+            </v-card-text>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>
@@ -90,13 +105,18 @@ export default {
       isOpen: "",
       loading: false,
       successMsg: "",
-      resource: null
+      resource: null,
+      service: null
     };
   },
   mounted() {
     this.$store.dispatch("Institutions/fetch_resources_of_institute", {
       institution_id: this.$route.params.id
     });
+    this.$store.dispatch("Institutions/fetch_services_of_institute", {
+      institution_id: this.$route.params.id
+    });
+    this.request_id = GET_RANDOM_ID();
   },
   methods: {
     submit() {
@@ -106,12 +126,13 @@ export default {
         .add({
           name: this.name,
           email: this.email,
-          type: this.type,
+          // type: this.type,
           desc: this.desc,
           isOpen: true,
           institution_id: this.$route.params.id,
-          request_id: GET_RANDOM_ID(),
+          request_id: this.request_id,
           resource: this.resource,
+          type: this.service
         })
         .then(() => {
           this.successMsg = "Request has been registered successfully!";
@@ -124,9 +145,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("Institutions", ["get_resources"]),
+    ...mapGetters("Institutions", ["get_resources", "get_services"]),
     resources() {
       return this.get_resources.map(resource => resource.title);
+    },
+    services() {
+      return this.get_services.map(service => service.title);
     }
   }
 };

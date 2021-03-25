@@ -13,9 +13,9 @@ import { mapGetters } from "vuex";
 export default {
   name: "App",
   // components: { Main },
-  mounted() {
-    this.check_authenticated();
-  },
+  // mounted() {
+  //   this.check_authenticated();
+  // },
   computed: {
     ...mapGetters("AuthStore", ["is_authenticated"]),
     style() {

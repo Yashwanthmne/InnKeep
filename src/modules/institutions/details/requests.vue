@@ -70,6 +70,20 @@
                   Email: {{ request.email || "NA" }}
                 </v-card-subtitle>
               </v-col>
+              <v-col>
+                <v-btn>
+                  <router-link
+                    :to="{
+                      name: 'request-status',
+                      params: {
+                        id: request.request_id
+                      }
+                    }"
+                  >
+                    <v-icon>{{ icons.mdiShareOutline }}</v-icon>
+                  </router-link>
+                </v-btn>
+              </v-col>
             </v-row>
           </v-container>
 
@@ -97,12 +111,17 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import EditRequest from "@/modules/institutions/details/edit_request";
+import { mdiShareOutline } from "@mdi/js";
+
 export default {
   components: {
     EditRequest
   },
   data() {
     return {
+      icons: {
+        mdiShareOutline
+      },
       edit_request: {
         open: false,
         request: null

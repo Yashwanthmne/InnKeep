@@ -1,8 +1,8 @@
-<template >
-  <v-main >
+<template>
+  <v-main>
     <v-container style="margin-top:12%" md3 fluid>
       <v-layout justify-end align-content-center>
-        <v-flex xs12 sm8 md3 >
+        <v-flex xs12 sm8 md3>
           <v-card class="elevation-12">
             <v-toolbar color="secondary">
               <v-toolbar-title>Signin</v-toolbar-title>
@@ -43,22 +43,22 @@
             </v-snackbar>
             <v-layout column align-center>
               <div class="text-xs-center">
-              <v-btn
-                :disabled="!email || !password"
-                :loading="loading"
-                color="success"
-                width="40px"
-                
-                @click="login"
-                data-testid="button-login"
-                >Login</v-btn
-              >
+                <v-btn
+                  :disabled="!email || !password"
+                  :loading="loading"
+                  color="success"
+                  width="40px"
+                  @click="login"
+                  data-testid="button-login"
+                  >Login</v-btn
+                >
               </div>
               <v-spacer />
               <v-divider class="mt-5" />
               <p>
-                Don't have an account? 
-                <router-link class="active"
+                Don't have an account?
+                <router-link
+                  class="active"
                   :to="{
                     name: 'signup'
                   }"
@@ -73,18 +73,16 @@
   </v-main>
 </template>
 
-
 <style scoped>
-.active{
-   color: blue;;
-   cursor: pointer;
- }
-v-btn{
+.active {
+  color: blue;
+  cursor: pointer;
+}
+v-btn {
   color: red;
 }
-p{
-
-font-size: 12px;
+p {
+  font-size: 12px;
 }
 </style>
 
@@ -100,11 +98,11 @@ export default {
       color: "general",
       showPassword: false
     };
-  }, 
+  },
   mounted() {
     if (this.$auth.is_authenticated()) {
       this.$router.push({ name: "home" });
-    } 
+    }
   },
   computed: {
     ...mapGetters("AuthStore", ["is_authenticated", "loading"])

@@ -65,9 +65,23 @@ export default {
       }
     }
   },
+  mounted() {
+    this.check_authenticated();
+  },
   methods: {
     logout() {
       this.$store.dispatch("AuthStore/logout", {});
+    },
+    check_authenticated() {
+      if (
+        !(
+          this.$auth.is_authenticated() ||
+          this.$route.name == "signin" ||
+          this.$route.name == "signup"
+        )
+      ) {
+        this.$router.push({ name: "signin" });
+      }
     }
   }
 };

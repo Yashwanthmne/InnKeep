@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "watch": "vue-cli-service serve --watch",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "start": "node server.js",
@@ -14,6 +15,7 @@
   "main": "index.js",
   "dependencies": {
     "@mdi/font": "^5.9.55",
+    "@mdi/js": "^5.9.55",
     "@popperjs/core": "^2.6.0",
     "bootstrap": "^5.0.0-beta1",
     "bootstrap-vue": "^2.21.2",
@@ -23,9 +25,11 @@
     "firebase": "^8.2.6",
     "material-design-icons-iconfont": "^6.1.0",
     "portal-vue": "^2.1.7",
+    "qrcode": "^1.4.4",
     "register-service-worker": "^1.7.1",
     "serve-static": "^1.14.1",
     "vue": "^2.6.12",
+    "vue-qrcode": "^0.3.5",
     "vue-router": "^3.2.0",
     "vue-toast-notification": "^0.6.1",
     "vuetify": "^2.4.0",
