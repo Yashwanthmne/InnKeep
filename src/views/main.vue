@@ -3,7 +3,10 @@
     <v-app-bar color="secondary" height="64px" absolute elevate-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>InnKeep</v-toolbar-title>
+      <v-toolbar-title>
+        <v-img src="@/assets/images/logo_gold.svg" width="10px" height="10px"></v-img>
+        InnKeep
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
       <v-switch
@@ -23,6 +26,7 @@
     </v-app-bar>
     <v-navigation-drawer app floating v-if="is_authenticated" color="secondary">
       <v-card-title>
+        <img src="@/assets/images/logo_gold.svg" width="40px" style="margin-right:8px;"/>
         InnKeep
       </v-card-title>
       <sidebar></sidebar>

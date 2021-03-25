@@ -3,7 +3,7 @@
     <v-row class="fill-height">
       <v-col>
         <v-list shaped>
-          <v-subheader>INSTIT UTIONS</v-subheader>
+          <v-subheader>INSTITUTIONS</v-subheader>
           <v-progress-linear
             v-if="fetching_institutions"
             indeterminate

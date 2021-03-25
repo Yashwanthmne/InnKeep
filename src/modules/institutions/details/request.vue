@@ -12,7 +12,7 @@
             <v-row>
               <v-col>
                 <v-toolbar-title style="font-size:32px;">
-                  Request #{{ get_request.request_id }}
+                  Request <span style="pacity:0.8;">#{{ get_request.request_id }}</span>
                 </v-toolbar-title>
 
                 <v-row>
